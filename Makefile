@@ -3,30 +3,17 @@ OBJS2 = add.h sub.h mul.h div.h
 
 all: multiply arrays ages loops
 
-multiply: multiply.o
-	gcc -o multiply multiply.o
+multiply: multiply.c
+	gcc -o multiply multiply.c
 
-arrays: arrays.o
-	gcc -o arrays arrays.o
+arrays: arrays.c
+	gcc -o arrays arrays.c
 
-ages: ages.o
-	gcc -o ages ages.o
+ages: ages.c
+	gcc -o ages ages.c
 
-loops: loops.o
-	gcc -o loops loops.o
-
-multiply.o: multiply.c
-	gcc -c multiply.c
-
-arrays.o: arrays.c
-	gcc -c arrays.c
-
-ages.o: ages.c
-	gcc -c ages.c
-
-loops.o: loops.c
-	gcc -c loops.c
-
+loops: loops.c
+	gcc -o loops loops.c
 
 clean:
-	rm -rf loops ages arrays multiply *.o
+	rm -rf loops ages arrays multiply
