@@ -9,7 +9,7 @@ int read_files(int, int, char**);
 int main(int argc, char* argv[]) {
 
   if (argc > 5 || argc%2 ==0) {
-    printf("usage: progam name, option, file name\n");
+    printf("usage: progam name, option, file name, option, filename\n");
     return -1;
   }
   int row;
@@ -36,6 +36,9 @@ int main(int argc, char* argv[]) {
       write_table(row, col, fp);
       fclose(fp);
     }
+    else{
+      printf("usage: progam name, option, file name, option, file name\n");
+    }
   }
   else if (argc == 5){
      if(!strcmp(argv[1], "-in") && !strcmp(argv[3], "-out")){
@@ -43,6 +46,9 @@ int main(int argc, char* argv[]) {
     }
     else if(!strcmp(argv[3], "-in") && !strcmp(argv[1], "-out")){
       read_files(4,2,argv);
+    }
+    else{
+      printf("usage: progam name, option, file name, option, file name\n");
     }
   }
   return 0;
