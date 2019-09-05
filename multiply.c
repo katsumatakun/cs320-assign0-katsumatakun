@@ -22,17 +22,7 @@ int main(int argc, char* argv[]) {
   }
 
   else if (argc==3){
-    // char line[256];
     if(!strcmp(argv[1], "-in")){
-    //   if((fp = fopen(argv[2], "r")) == NULL ) {
-    //     printf("Input file not open\n");
-    //     return -1;
-    //   }
-    //   while (fgets(line, sizeof(line), fp)){
-    //     printf("%s",line);
-    //     }
-    //
-    //   fclose(fp);
     read_files(2, 99, argv);
     }
     else if(!strcmp(argv[1], "-out")){
@@ -50,31 +40,11 @@ int main(int argc, char* argv[]) {
   else if (argc == 5){
      if(!strcmp(argv[1], "-in") && !strcmp(argv[3], "-out")){
        read_files(2,4,argv);
-    //   FILE *fpr;
-    //   FILE *fpw;
-    //   char line[256];
-    //   if((fpr = fopen(argv[2], "r")) == NULL ) {
-    //     printf("Input file not open\n");
-    //     return -1;
-    //   }
-    //   if((fpw = fopen(argv[4], "w")) == NULL ) {
-    //     printf("Input file not open\n");
-    //     return -1;
-    //   }
-    //   while (fgets(line, sizeof(line), fpr)){
-    //     fprintf(fpw, "%s", line);
-    //   }
-    //
-    //   fclose(fpr);
-    //   fclose(fpw);
-
     }
-
     else if(!strcmp(argv[3], "-in") && !strcmp(argv[1], "-out")){
       read_files(4,2,argv);
     }
   }
-
   return 0;
 }
 
