@@ -13,6 +13,11 @@ int main() {
         }
       printf("Run again (y/n)? ");
       scanf(" %c", &ans);
+      while(ans!='n' && ans!='y'){
+        printf("invalid Input\n");
+        printf("Run again (y/n)? ");
+        scanf(" %c", &ans);
+      }
       if(ans=='n')
         finished = 1;
     }

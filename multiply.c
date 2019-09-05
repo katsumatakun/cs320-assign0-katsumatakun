@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define N 256
 
 void print_table(int, int);
 void write_table(int, int, FILE*);
+int read_files(int, int, char**);
 
 int main(int argc, char* argv[]) {
 
@@ -22,20 +22,21 @@ int main(int argc, char* argv[]) {
   }
 
   else if (argc==3){
-    FILE *fp;
-    char line[256];
+    // char line[256];
     if(!strcmp(argv[1], "-in")){
-      if((fp = fopen(argv[2], "r")) == NULL ) {
-        printf("Input file not open\n");
-        return -1;
-      }
-      while (fgets(line, sizeof(line), fp)){
-        printf("%s",line);
-        }
-
-      fclose(fp);
+    //   if((fp = fopen(argv[2], "r")) == NULL ) {
+    //     printf("Input file not open\n");
+    //     return -1;
+    //   }
+    //   while (fgets(line, sizeof(line), fp)){
+    //     printf("%s",line);
+    //     }
+    //
+    //   fclose(fp);
+    read_files(2, 99, argv);
     }
     else if(!strcmp(argv[1], "-out")){
+      FILE *fp;
       if((fp = fopen(argv[2], "w")) == NULL ) {
         printf("Output file not open\n");
         return -1;
@@ -46,47 +47,31 @@ int main(int argc, char* argv[]) {
       fclose(fp);
     }
   }
-
   else if (argc == 5){
-    if(!strcmp(argv[1], "-in") && !strcmp(argv[3], "-out")){
-      FILE *fpr;
-      FILE *fpw;
-      char line[256];
-      if((fpr = fopen(argv[2], "r")) == NULL ) {
-        printf("Input file not open\n");
-        return -1;
-      }
-      if((fpw = fopen(argv[4], "w")) == NULL ) {
-        printf("Input file not open\n");
-        return -1;
-      }
-      while (fgets(line, sizeof(line), fpr)){
-        fprintf(fpw, "%s", line);
-      }
+     if(!strcmp(argv[1], "-in") && !strcmp(argv[3], "-out")){
+       read_files(2,4,argv);
+    //   FILE *fpr;
+    //   FILE *fpw;
+    //   char line[256];
+    //   if((fpr = fopen(argv[2], "r")) == NULL ) {
+    //     printf("Input file not open\n");
+    //     return -1;
+    //   }
+    //   if((fpw = fopen(argv[4], "w")) == NULL ) {
+    //     printf("Input file not open\n");
+    //     return -1;
+    //   }
+    //   while (fgets(line, sizeof(line), fpr)){
+    //     fprintf(fpw, "%s", line);
+    //   }
+    //
+    //   fclose(fpr);
+    //   fclose(fpw);
 
-      fclose(fpr);
-      fclose(fpw);
     }
 
     else if(!strcmp(argv[3], "-in") && !strcmp(argv[1], "-out")){
-      FILE *fpr;
-      FILE *fpw;
-      char line[256];
-      if((fpr = fopen(argv[4], "r")) == NULL ) {
-        printf("Input file not open\n");
-        return -1;
-      }
-      if((fpw = fopen(argv[2], "w")) == NULL ) {
-        printf("Input file not open\n");
-        return -1;
-      }
-      while (fgets(line, sizeof(line), fpr)){
-        fprintf(fpw, "%s", line);
-      }
-
-      fclose(fpr);
-      fclose(fpw);
-
+      read_files(4,2,argv);
     }
   }
 
@@ -118,4 +103,47 @@ void write_table(int row, int col, FILE* fp){
     }
     fprintf(fp, "\n");
   }
+}
+
+int read_files(int infile, int outfile,char** argv){
+  FILE *fpr;
+  char line[256];
+  if((fpr = fopen(argv[infile], "r")) == NULL ) {
+    printf("Input file not open\n");
+    return -1;
+  }
+
+  fgets(line, sizeof(int), fpr);
+  char* endptr;
+  int row = strtol(line,&endptr,10);
+  if(row==0){
+    printf("invalid format\n");
+    return -1;
+  }
+  fgets(line, sizeof(int), fpr);
+  int col = strtol(line,&endptr,10);
+  if(col==0){
+    printf("invalid format\n");
+    return -1;
+  }
+
+  if(outfile!=99){
+    FILE *fpw;
+    if((fpw = fopen(argv[outfile], "w")) == NULL ) {
+      printf("Input file not open\n");
+      return -1;
+    }
+    printf("write table\n");
+    write_table(row, col, fpw);
+    fclose(fpw);
+  }
+
+  else{
+    print_table(row,col);
+  }
+
+  fclose(fpr);
+
+
+  return 0;
 }
