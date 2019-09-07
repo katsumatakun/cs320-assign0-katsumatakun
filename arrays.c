@@ -7,8 +7,10 @@ int main() {
 
     int size = sizeof(nums)/sizeof(int);
 
+    printf("Initial array: ");
     print_array(&nums, size);
     printf("Number of 0’s: %d\n",count_zeros(&nums, size));
+    printf("Tripled array: ");
     triple(&nums, size);
     print_array(&nums, size);
 
