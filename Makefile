@@ -1,5 +1,4 @@
-OBJS = add.o sub.o mul.o div.o
-OBJS2 = add.h sub.h mul.h div.h
+
 
 all: multiply arrays ages loops
 
